@@ -1,14 +1,12 @@
 from django.db import models
 
-# Create your models here.
 class Profile(models.Model):
     username = models.CharField(max_length=25)
     email = models.CharField(max_length=40)
     city = models.CharField(max_length=40)
     state = models.CharField(max_length=40)
-    zipcode = models.FloatField(max_length=5)
+    zipcode = models.IntegerField()  # Changed from FloatField to IntegerField
     photo = models.ImageField(upload_to='photos/', default='default_photo.jpg')
-
 
     def __str__(self):
         return str(self.username)
@@ -55,7 +53,6 @@ class Messages(models.Model):
     def __str__(self):
         return str(self.from_profile_id)
     
-
 class Comment(models.Model):
     body = models.CharField(max_length=2500)
     image = models.TextField()
