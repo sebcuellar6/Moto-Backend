@@ -36,17 +36,19 @@ class MeetUpEventSerializer(serializers.HyperlinkedModelSerializer):
         fields = ['id', 'name', 'description', 'invite_only', 'main_image', 'images', 'category', 'skill_level', 'location', 'type', 'tags', 'profile_id']
 
 
-
 class ForumPostSerializer(serializers.HyperlinkedModelSerializer):
     profile_id = serializers.PrimaryKeyRelatedField(
         queryset=Profile.objects.all()
     )
-
+    username = serializers.SerializerMethodField()
     comments = CommentSerializer(many=True, read_only=True)
 
     class Meta:
         model = ForumPost
-        fields = ['id', 'title', 'tags', 'body', 'images', 'links', 'category', 'profile_id', 'first_choice', 'second_choice', 'votes1', 'votes2', 'comments']
+        fields = ['id', 'title', 'tags', 'body', 'images', 'links', 'category', 'profile_id', 'username', 'first_choice', 'second_choice', 'votes1', 'votes2', 'comments']
+
+    def get_username(self, obj):
+        return obj.profile_id.username
 
 class ProfileSerializer(serializers.HyperlinkedModelSerializer):
     forum_posts = ForumPostSerializer(many=True, read_only=True)
