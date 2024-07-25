@@ -23,7 +23,7 @@ class ForumPost(models.Model):
     body = models.CharField(max_length=2500)
     images = models.ImageField(upload_to='photos/', default='default_photo.jpg')
     links = models.CharField(max_length=2500)
-    category = models.CharField(max_length=500)
+    category = models.ManyToManyField(Category, related_name='forum_posts')
     profile_id = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='forum_posts')
     first_choice = models.CharField(max_length=150, blank=True, null=True)
     second_choice = models.CharField(max_length=150, blank=True, null=True)
@@ -39,11 +39,11 @@ class MeetUpEvent(models.Model):
     invite_only = models.BooleanField()
     main_image = models.ImageField(upload_to='photos/', default='default_photo.jpg')
     images = models.ImageField(upload_to='photos/', default='default_photo.jpg')
-    category = models.CharField(max_length=500)
     skill_level = models.CharField(max_length=75)
     location = models.CharField(max_length=75)
     type = models.CharField(max_length=30)
     tags = models.CharField(max_length=200)
+    category = models.ManyToManyField(Category, related_name='meetup_events')
     profile_id = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='meetup_events')
 
     def __str__(self):
