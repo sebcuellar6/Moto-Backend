@@ -11,11 +11,17 @@ class Profile(models.Model):
     def __str__(self):
         return str(self.username)
     
+class Category(models.Model):
+    name = models.CharField(max_length=25)
+
+    def __str__(self):
+        return str(self.name)
+    
 class ForumPost(models.Model):
     title = models.CharField(max_length=75)
     tags = models.CharField(max_length=200)
     body = models.CharField(max_length=2500)
-    images = models.TextField()
+    images = models.ImageField(upload_to='photos/', default='default_photo.jpg')
     links = models.CharField(max_length=2500)
     category = models.CharField(max_length=500)
     profile_id = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='forum_posts')
@@ -31,8 +37,8 @@ class MeetUpEvent(models.Model):
     name = models.CharField(max_length=75)
     description = models.CharField(max_length=2500)
     invite_only = models.BooleanField()
-    main_image = models.TextField()
-    images = models.TextField()
+    main_image = models.ImageField(upload_to='photos/', default='default_photo.jpg')
+    images = models.ImageField(upload_to='photos/', default='default_photo.jpg')
     category = models.CharField(max_length=500)
     skill_level = models.CharField(max_length=75)
     location = models.CharField(max_length=75)
@@ -55,7 +61,7 @@ class Messages(models.Model):
     
 class Comment(models.Model):
     body = models.CharField(max_length=2500)
-    image = models.TextField()
+    image = models.ImageField(upload_to='photos/', default='default_photo.jpg')
     post_id = models.ForeignKey(ForumPost, on_delete=models.CASCADE, related_name='comments')
     profile_id = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='comments')
 

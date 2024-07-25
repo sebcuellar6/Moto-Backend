@@ -1,5 +1,11 @@
 from rest_framework import serializers
-from .models import Comment, Messages, MeetUpEvent, ForumPost, Profile
+from .models import Comment, Messages, MeetUpEvent, ForumPost, Profile, Category
+
+class CategorySerializer(serializers.HyperlinkedModelSerializer):
+
+    class Meta:
+        model = Category
+        fields = ['id', 'name']
 
 class CommentSerializer(serializers.HyperlinkedModelSerializer):
     post_id = serializers.PrimaryKeyRelatedField(

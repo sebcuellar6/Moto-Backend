@@ -12,4 +12,6 @@ urlpatterns = [
     path('comments/<int:pk>/', views.CommentDetail.as_view(), name='comment_detail'),
     path('messages/', views.MessagesList.as_view(), name='message_list'),
     path('messages/<int:pk>/', views.MessagesDetail.as_view(), name='message_detail'),
+    path('categories/', views.CategoryList.as_view(), name='category_list'),
+    path('categories/<int:pk>/', views.CategoryDetail.as_view(), name='category_detail'),
 ]

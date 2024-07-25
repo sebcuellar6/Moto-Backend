@@ -1,6 +1,6 @@
 from rest_framework import generics
-from .serializers import ProfileSerializer, CommentSerializer, MeetUpEventSerializer, ForumPostSerializer, MessagesSerializer
-from .models import Profile, Comment, MeetUpEvent, ForumPost, Messages
+from .serializers import ProfileSerializer, CommentSerializer, MeetUpEventSerializer, ForumPostSerializer, MessagesSerializer, CategorySerializer
+from .models import Profile, Comment, MeetUpEvent, ForumPost, Messages, Category
 
 class ProfileList(generics.ListCreateAPIView):
     queryset = Profile.objects.all()
@@ -41,5 +41,13 @@ class MessagesList(generics.ListCreateAPIView):
 class MessagesDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Messages.objects.all()
     serializer_class = MessagesSerializer
+
+class CategoryList(generics.ListCreateAPIView):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+
+class CategoryDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
 
 # Create your views here.
