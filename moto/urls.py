@@ -1,5 +1,7 @@
 from django.urls import path
 from . import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('profiles/', views.ProfileList.as_view(), name='profile_list'),
@@ -14,4 +16,4 @@ urlpatterns = [
     path('messages/<int:pk>/', views.MessagesDetail.as_view(), name='message_detail'),
     path('categories/', views.CategoryList.as_view(), name='category_list'),
     path('categories/<int:pk>/', views.CategoryDetail.as_view(), name='category_detail'),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

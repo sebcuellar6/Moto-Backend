@@ -14,10 +14,14 @@ class CommentSerializer(serializers.HyperlinkedModelSerializer):
     profile_id = serializers.PrimaryKeyRelatedField(
         queryset=Profile.objects.all()
     )
+    username = serializers.SerializerMethodField()
 
     class Meta:
         model = Comment
-        fields = ['id', 'body', 'image', 'post_id', 'profile_id']
+        fields = ['id', 'body', 'image', 'post_id', 'profile_id', 'username']
+
+    def get_username(self, obj):
+        return obj.profile_id.username
 
 class MessagesSerializer(serializers.HyperlinkedModelSerializer):
     from_profile_id = serializers.PrimaryKeyRelatedField(
