@@ -41,15 +41,13 @@ INSTALLED_APPS = [
     'moto',
     'corsheaders',
     'rest_framework',
+    'rest_framework_simplejwt',
 ]
 
 REST_FRAMEWORK = {
-    # Use Django's standard `django.contrib.auth` permissions,
-    # or allow read-only access for unauthenticated users.
-    'DEFAULT_PERMISSION_CLASSES': [
-   'rest_framework.permissions.AllowAny',
-]
-
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
 }
 
 MIDDLEWARE = [
@@ -66,7 +64,9 @@ MIDDLEWARE = [
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",
+]
 
 ROOT_URLCONF = 'moto_django.urls'
 
@@ -143,3 +143,8 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTH0_DOMAIN = 'dev-8tsfcfzo7uqf0hje.us.auth0.com'
+API_IDENTIFIER = 'https://moto-api.com/'  # replace with your actual API identifier
+AUTH0_CLIENT_ID = '66a3fc38f537aa33f39face1'
+AUTH0_CLIENT_SECRET = 'zFIwjEAc_eIDUh1X7OiQxr0ePIoP5DPALsNsq_Ezvx6SYSn_VOx5v2G6DYgqlYsC' 
